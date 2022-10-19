@@ -11,6 +11,10 @@ dotenv.config();
 // specify your middleware here
 app.use(express.json());
 
+//cors
+app.use(cors({
+    origin:"*"
+}))
 // specify your routes here
 
 app.use("/companies",companiesRouter);
