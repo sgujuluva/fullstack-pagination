@@ -46,11 +46,11 @@ export default function List() {
           <h1>
             This is the list! Displaying listings {skip} to {skip + limit}
           </h1>
-<div className="mapping">
-          {list.map((item) => (
-            <ListItem {...item} />
-          ))}
-          </div>
+          {/* <div className="mapping"> */}
+            {list.map((item) => (
+              <ListItem {...item} />
+            ))}
+         {/*  </div> */}
           <div className={styles.buttons}>
             <button onClick={handlePrevious}>Previous</button>
             <button onClick={handleNext}>Next</button>
