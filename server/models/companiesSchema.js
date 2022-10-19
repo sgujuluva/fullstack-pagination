@@ -15,3 +15,7 @@ const companiesSchema = new Schema({
     }
 ]
 })
+
+const Companies = model("Companies", companiesSchema)
+
+export default Companies
