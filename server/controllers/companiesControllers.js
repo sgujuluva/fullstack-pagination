@@ -4,7 +4,7 @@ import Companies from "../models/companiesSchema.js";
 export const getCompaniesList = async (req, res) => {
   try {
     const getAllCompanies = await Companies.find({}).select(
-      "name email_address products"
+      "name email_address description products"
     );
 
     return res
@@ -17,7 +17,16 @@ export const getCompaniesList = async (req, res) => {
 
 //sorting the companies name in ascending order
 export const sortingCompanyName = async (req, res) => {
-    const limit = Number(req.query.limit) || 50
-  const sortName = await Companies.find().select("name").limit(limit).sort({ name: 1 }).lean();
+    const skip = Number(req.query.skip) || 1;
+    const limit = Number(req.query.limit) || 50;
+  const sortName = await Companies.find().select("name").skip(skip).limit(limit).sort({ name: 1 }).lean();
   return res.status(200).json(sortName);
+};
+
+//listing with skip
+export const listingWithSkip = async (req, res) => {
+    const skip = Number(req.query.skip) || 1;
+    const limit = Number(req.query.limit) || 50;
+  const withSkip = await Companies.find().select("name email_address description products").skip(skip).limit(limit).sort({ name: 1 }).lean();
+  return res.status(200).json(withSkip);
 };
