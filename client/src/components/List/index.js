@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
+import axios from "axios";
 import styles from "./index.module.css";
 
 export default function List() {
+
   const [list, setList] = useState([]);
 
-  useEffect(() => {}, []);
+  /* const getCompaniesListFromServer = async() =>{
+    await axios.get("http://localhost:3001/companies/list")
+  } */
 
+  useEffect(async() => {
+    const getCompaniesListFromServer =  await axios.get("http://localhost:3001/companies/sort")
+      setList(getCompaniesListFromServer.data)  
+   
+  }, []);
+
+  console.log(list)
   return (
     <div className={styles.container}>
       <h1>This is the list!</h1>
