@@ -4,7 +4,11 @@ export default function ListItem(props) {
     return (
         <div className={styles.container}>
         
-            <h1>{props.name}</h1>
+            <ul className="companies-list">
+                <li>{props.name}</li>
+                <li>{props.email_address}</li>
+                
+            </ul>
 
         </div>
     )

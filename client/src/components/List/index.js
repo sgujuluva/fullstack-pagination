@@ -4,34 +4,52 @@ import axios from "axios";
 import styles from "./index.module.css";
 
 export default function List() {
-
+  const limit = 25;
   const [list, setList] = useState([]);
+  const [skip, setSkip] = useState(0);
 
-  /* const getCompaniesListFromServer = async() =>{
-    await axios.get("http://localhost:3001/companies/list")
-  } */
+  //getting data from backend using axios
+  const getCompaniesListFromServer = async () => {
+    await axios
+      .get(`http://localhost:3001/companies/list?skip=${skip}&limit=${limit}`)
+      .then((response) => setList(response.data));
+  };
 
-  useEffect(async() => {
-    const getCompaniesListFromServer =  await axios.get("http://localhost:3001/companies/sort")
-      setList(getCompaniesListFromServer.data)  
-   
+  //function for previous button
+  const handlePrevious = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    } else {
+      setSkip(newSkip);
+    }
+  };
+  useEffect(() => {
+    getCompaniesListFromServer();
   }, []);
 
-  console.log(list)
   return (
     <div className={styles.container}>
-      <h1>This is the list!</h1>
-      <p>As you can see it is empty</p>
-      <p>Load some data from your API using the useEffect statement</p>
+      {!list ? (
+        <>
+          <p>As you can see it is empty</p>
+          <p>Load some data from your API using the useEffect statement</p>
+        </>
+      ) : (
+        <>
+          <h1>
+            This is the list! Displaying listings {skip} to {skip + limit}
+          </h1>
+          <div className={styles.buttons}>
+            <button onClick={handlePrevious}>Previous</button>
+            <button onClick={handleNext}>Next</button>
+          </div>
 
-      <div className={styles.buttons}>
-        <button>Previous</button>
-        <button>Next</button>
-      </div>
-
-      {list.map((item) => (
-        <ListItem {...item} />
-      ))}
+          {list.map((item) => (
+            <ListItem {...item} />
+          ))}
+        </>
+      )}
     </div>
   );
 }

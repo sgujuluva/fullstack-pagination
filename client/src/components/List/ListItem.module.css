@@ -1,3 +1,6 @@
 .container {
 
 }
+.container .companies-list {
+   border:2px solid red;
+}

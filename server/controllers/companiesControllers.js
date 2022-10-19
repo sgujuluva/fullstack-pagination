@@ -19,7 +19,7 @@ export const getCompaniesList = async (req, res) => {
 export const sortingCompanyName = async (req, res) => {
     const skip = Number(req.query.skip) || 1;
     const limit = Number(req.query.limit) || 50;
-  const sortName = await Companies.find().select("name").skip(skip).limit(limit).sort({ name: 1 }).lean();
+  const sortName = await Companies.find().select("name email_address description products").skip(skip).limit(limit).sort({ name: 1 }).lean();
   return res.status(200).json(sortName);
 };
 
