@@ -46,3 +46,4 @@ Your users may want greater control over how to display the data, for example, s
 1. You will have to update your backend to receive a sorting parameter, alongside the skip parameter
 
 2. You should validate in the backend that the parameter you receive is valid
+# fullstack-pagination
