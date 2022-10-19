@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import companiesRouter from "./routes/companies.js"
 
 const app = express();
 
@@ -10,6 +11,9 @@ dotenv.config();
 app.use(express.json());
 
 // specify your routes here
+
+app.use("/companies",companiesRouter);
+
 
 console.log('Connecting to database. Put the kettle on while you wait... 🫖')
 
