@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./index.module.css";
 
 export default function List() {
-  const limit = 10;
+  const limit = 100;
   const [list, setList] = useState([]);
   const [skip, setSkip] = useState(0);
 
